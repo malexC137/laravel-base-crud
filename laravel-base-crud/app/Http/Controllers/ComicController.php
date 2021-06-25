@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Comic;
-use App\User;
 
 class ComicController extends Controller
 {
@@ -15,7 +14,7 @@ class ComicController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $comics = User::all();
+        $comics = Comic::all();
 
         return view('comics.index', [
             "comics" => $comics
@@ -40,14 +39,15 @@ class ComicController extends Controller
     public function store(Request $request) {
         $newComicData = $request->all();
 
-        $newComic = new User();
-        $newComic->title = $newComicData['title'];
-        $newComic->description = $newComicData['description'];
-        $newComic->thumb = $newComicData['thumb'];
-        $newComic->price = $newComicData['price'];
-        $newComic->series = $newComicData['series'];
-        $newComic->sale_date = $newComicData['sale_date'];
-        $newComic->type = $newComicData['type'];
+        $newComic = new Comic();
+        // $newComic->title = $newComicData['title'];
+        // $newComic->description = $newComicData['description'];
+        // $newComic->thumb = $newComicData['thumb'];
+        // $newComic->price = $newComicData['price'];
+        // $newComic->series = $newComicData['series'];
+        // $newComic->sale_date = $newComicData['sale_date'];
+        // $newComic->type = $newComicData['type'];
+        $newComic->fill($newComicData);
 
         $newComic->save();
 
@@ -60,9 +60,9 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $comic)
+    public function show(Comic $comic)
     {
-            return view('names.show', [
+            return view('comics.show', [
                 "comic" => $comic
             ]);
     }

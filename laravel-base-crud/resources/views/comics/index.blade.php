@@ -3,6 +3,7 @@
 @section('page_title', 'Creation new comic')
 @section('content')
 
+<a href=" {{ route('comics.create') }} ">Aggiungi fumetto</a>
 <table>
     <thead>
         <tr>
@@ -27,6 +28,7 @@
             <td> {{ $comic->series }} </td>
             <td> {{ $comic->sale_date }} </td>
             <td> {{ $comic->type }} </td>
+            <td><a href=" {{ route('comics.show', $comic->id) }} ">Dettagli...</a></td>
         </tr>
         @endforeach
     </tbody>

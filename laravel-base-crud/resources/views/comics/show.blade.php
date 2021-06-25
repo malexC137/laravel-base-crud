@@ -3,15 +3,20 @@
 @section('page_title', 'Creation new comic')
 
 @section('content')
+
+<a href=" {{ route('comics.index') }} ">Torna alla home</a>
+
     <ul>
-    <li>ID: {{ $name->id }} </li>
-    <li>Title: {{ $name->title }} </li>
-    <li>Description: {{ $name->description }} </li>
-    <li>Thumb: {{ $name->thumb }} </li>
-    <li>Price: {{ $name->price }} </li>
-    <li>Sale date: {{ $name->sale_date }} </li>
-    <li>Type: {{ $name->type }} </li>
-    <li>Created at: {{ $name->created_at }} </li>
-    <li>Updated at: {{ $name->updated_at }} </li>
+    <li>ID: {{ $comic->id }} </li>
+    <li>Title: {{ $comic->title }} </li>
+    <li>Description: {{ $comic->description }} </li>
+    <li>Thumb: {{ $comic->thumb }} </li>
+    <li>Price: {{ $comic->price }} </li>
+    <li>Series: {{ $comic->series }} </li>
+    <li>Sale date: {{ $comic->sale_date }} </li>
+    <li>Type: {{ $comic->type }} </li>
+    <li>Created at: {{ $comic->created_at }} </li>
+    <li>Updated at: {{ $comic->updated_at }} </li>
+    {{-- <li>DATA VER. EMAIL: {{ $comic->email_verified_at }}</li> --}}
     </ul>
 @endsection
