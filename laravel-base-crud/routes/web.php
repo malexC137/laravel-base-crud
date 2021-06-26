@@ -31,3 +31,12 @@ Route::get("/comics/create", "ComicController@create")->name("comics.create");
 
 //Rotta che ci mostra tutti gli elementi disponibili
 Route::get("/comics/{comic}", "ComicController@show")->name("comics.show");
+
+//Rotta che ci permette di fare a meno di tutte le altre
+// Route::resource("/comics", "ComicController");
+
+//Rotta che salva i dati nel database di un elemento già esistente
+Route::match(["PUT", "PATCH"], "/comics/{comic}", "ComicController@update")->name("comics.update");
+
+//Mostra il form per modificare un elemento
+Route::get("/comics/{comic}/edit", "ComicController@edit")->name("comics.edit");
