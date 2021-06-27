@@ -4,6 +4,8 @@
 @section('content')
 <a href=" {{ route('comics.index') }} ">Torna alla home</a>
 
+@include('comics.components.errorsAlert')
+
 <form action=" {{ route('comics.update', $comic->id) }} " method="post">
     @csrf
 

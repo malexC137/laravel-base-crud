@@ -38,5 +38,8 @@ Route::get("/comics/{comic}", "ComicController@show")->name("comics.show");
 //Rotta che salva i dati nel database di un elemento già esistente
 Route::match(["PUT", "PATCH"], "/comics/{comic}", "ComicController@update")->name("comics.update");
 
+//Rotta che elimina dal database l'utente con l'id specificato
+Route::delete("/comics/{comic}", "ComicController@destroy")->name("comics.destroy");
+
 //Mostra il form per modificare un elemento
 Route::get("/comics/{comic}/edit", "ComicController@edit")->name("comics.edit");

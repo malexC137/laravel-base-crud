@@ -30,6 +30,7 @@
             <td> {{ $comic->type }} </td>
             <td><a href=" {{ route('comics.show', $comic->id) }} ">Dettagli...</a></td>
             <td><a href=" {{ route('comics.edit', $comic->id) }} ">Modifica</a></td>
+            @include('comics/components.deleteBtn', ["comic"=>$comic])
         </tr>
         @endforeach
     </tbody>

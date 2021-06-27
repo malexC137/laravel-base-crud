@@ -5,8 +5,8 @@
 @section('content')
 
 <a href=" {{ route('comics.index') }} ">Torna alla home</a>
-
-    <ul>
+@include('comics/components.deleteBtn', ["comic"=>$comic])
+<ul>
     <li>ID: {{ $comic->id }} </li>
     <li>Title: {{ $comic->title }} </li>
     <li>Description: {{ $comic->description }} </li>
@@ -18,5 +18,5 @@
     <li>Created at: {{ $comic->created_at }} </li>
     <li>Updated at: {{ $comic->updated_at }} </li>
     {{-- <li>DATA VER. EMAIL: {{ $comic->email_verified_at }}</li> --}}
-    </ul>
+</ul>
 @endsection

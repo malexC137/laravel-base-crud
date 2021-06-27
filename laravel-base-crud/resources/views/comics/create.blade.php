@@ -3,6 +3,8 @@
 @section('page_title', 'Creation new comic')
 @section('content')
 <a href=" {{ route('comics.index') }} ">Torna alla home</a>
+@include('comics.components.errorsAlert')
+
 <form action=" {{ route('comics.store') }} " method="post">
     @csrf
     <label for="title">Title</label>

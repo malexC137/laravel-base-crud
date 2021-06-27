@@ -13,7 +13,8 @@ class ComicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         $comics = Comic::all();
 
         return view('comics.index', [
@@ -26,7 +27,8 @@ class ComicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
         return view("comics.create");
     }
 
@@ -36,8 +38,19 @@ class ComicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $newComicData = $request->all();
+
+        $request->validate([
+            "title"=>"required|max:100",
+            "description"=>"required|max:10000",
+            "thumb"=>"required|max:255",
+            "price"=>"required|between:0,99.99",
+            "series"=>"required|max:100",
+            "sale_date"=>"required|date_format:Y-m-d",
+            "type"=>"required|max:100",
+        ]);
 
         $newComic = new Comic();
         $newComic->fill($newComicData);
@@ -55,9 +68,12 @@ class ComicController extends Controller
      */
     public function show(Comic $comic)
     {
-            return view('comics.show', [
-                "comic" => $comic
-            ]);
+        if (is_null($comic)) {
+            abort(404);
+        }
+        return view('comics.show', [
+            "comic" => $comic
+        ]);
     }
 
     /**
@@ -68,7 +84,7 @@ class ComicController extends Controller
      */
     public function edit($id)
     {
-        $comic = Comic::find($id);
+        $comic = Comic::findOrFail($id);
 
         return view("comics.edit", [
             "comic" => $comic
@@ -84,8 +100,18 @@ class ComicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $comic = Comic::find($id);
+        $comic = Comic::findOrFail($id);
         $formData = $request->all();
+
+        $request->validate([
+            "title"=>"required|max:100",
+            "description"=>"required|max:10000",
+            "thumb"=>"required|max:255",
+            "price"=>"required|between:0,99.99",
+            "series"=>"required|max:100",
+            "sale_date"=>"required|date_format:Y-m-d",
+            "type"=>"required|max:100",
+        ]);
 
         $comic->update($formData);
 
@@ -100,6 +126,10 @@ class ComicController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comic = Comic::findOrFail($id);
+
+        $comic->delete();
+
+        return redirect()->route("comics.index"); 
     }
 }
